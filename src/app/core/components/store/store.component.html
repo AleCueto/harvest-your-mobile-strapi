@@ -1,0 +1,83 @@
+
+  <!-- <ion-img style="height:55vh; margin:auto; z-index: -1;" src="/assets/images/store/tendero.png"></ion-img> -->
+<div class="main-container">
+
+  
+
+    <ion-segment value="farmeables">
+      <ion-segment-button value="farmeables" (click)="selectItem('farmeables')">
+        <ion-label>{{"generic.farmeables" | translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="tiles" (click)="selectItem('tiles')">
+        <ion-label>{{"generic.tiles" | translate}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="farms" (click)="selectItem('farms')">
+        <ion-label>{{"generic.farms" | translate}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    
+  <ng-container [ngSwitch]="storeSelected">
+    <div *ngSwitchCase="'farmeables' " style="background-color: rgb(230, 230, 230) !important;" class="wrapper">
+      <h1>{{ "generic.money"| translate}} {{getMoney() | async}}</h1> 
+      <form [formGroup]="form_farmeable"  (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()" class="square">
+        <app-farmeable-selectable formControlName="farmeable"></app-farmeable-selectable>
+        <ion-item>
+          <ion-label>{{"store.amount" | translate}}</ion-label>
+          <ion-input type="number" min="0" placeholder="0" formControlName="amount"></ion-input>
+        </ion-item>
+        <ion-button class="square" style="margin: 15px;"  [disabled]="!form_farmeable.valid" type="submit" >{{"store.pay" | translate}}</ion-button>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'farms'" style="background-color: rgb(230, 230, 230) !important;" class="wrapper">
+      <h1>{{ "generic.money"| translate}} {{getMoney() | async}}</h1> 
+
+      <div class="square">
+        <ion-item>
+          {{"store.buy_new_farm" | translate}} {{farmPrice}}
+
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="{{'store.choose_name'|translate}}" [(ngModel)]="newFarmName"></ion-input>
+        </ion-item>
+      </div>
+      
+      <ion-button class="square" [disabled]="newFarmName == ''" (click)="createFarm()">{{"store.create_new_farm"|translate}}</ion-button>
+
+    </div>
+
+
+
+
+    <!--  -->
+    <div *ngSwitchCase="'tiles' " style="background-color: rgb(230, 230, 230) !important;" class="wrapper">
+      <h1>{{ "generic.money"| translate}} {{getMoney() | async}}</h1> 
+
+      <!-- <ion-input type="number" placeholder="Escribe el nombre de tu granja" [(ngModel)]="tilesToBuy"></ion-input> -->
+
+      <div class="square">
+        <form [formGroup]="form_tile"  (ngSubmit)="onSubmitTile()" (keyup.enter)="onSubmitTile()">
+          <ion-item>
+            {{"store.buy_new_tile" | translate}} {{"store.price" | translate}} {{tilePrice}} {{"store.coins" | translate}}
+          </ion-item>
+          <ion-item>
+            <ion-input type="number" min="0" placeholder="0" formControlName="amount"></ion-input>
+          </ion-item>
+          <ion-button class="square" style="margin: 15px;"  [disabled]="!form_tile.valid" type="submit" >{{"store.pay" | translate}}</ion-button>
+        </form>
+      </div>
+
+
+      <!--CONTINUAR  TIene que ser un formulario-->
+      <!-- <ion-button (click)="createTiles(tilesToBuy)">Add Tile</ion-button> -->
+    </div>
+    
+    <div class="wrapper">
+      <ion-img src="/assets/images/store/tendero.png" style="margin-top: 1%;"></ion-img>
+    </div>
+  </ng-container>
+
+  
+  </div>
+
+

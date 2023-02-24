@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{"creator.data_farmeable" | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onDismiss(null)">{{"generic.cancel" | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">
+        {{"generic.name" | translate}}
+      </ion-label>
+      <ion-input type="text" placeholder="Introduce tu nombre" formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"store.amount" | translate}}
+        
+      </ion-label>
+      <ion-input type="number" placeholder="Introduce el número de farmeables" formControlName="amount"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.image_beginning"| translate}}
+      </ion-label>
+      <ion-input type="text" placeholder="Introduce la primera imagen" formControlName="image_beggining"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.image_middle"| translate}}
+      </ion-label>
+      <ion-input type="text" placeholder="Introduce la segunda imagen" formControlName="image_middle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.image_end"| translate}}
+      </ion-label>
+      <ion-input type="text" placeholder="Introduce la tercera imagen" formControlName="image_end"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.purchase_value"| translate}}
+      </ion-label>
+      <ion-input type="number" placeholder="Introduce el valor de compra" formControlName="purchase_value"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.sale_value"| translate}}
+      </ion-label>
+      <ion-input type="number" placeholder="Introduce el valor de compra" formControlName="sale_value"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">
+        {{"creator.seconds_to_harvest"| translate}}
+      </ion-label>
+      <ion-input type="number" placeholder="Introduce los segundos para recoger" formControlName="seconds_to_harvest"></ion-input>
+    </ion-item>
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-button [disabled]="!form.valid" (click)="onSubmit()">{{(mode=="Edit"?"generic.modify":"generic.add") | translate}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

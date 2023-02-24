@@ -1,0 +1,9 @@
+<ion-badge slot="start" (click)="deleteTile(this.tileInput)" >x</ion-badge>
+    <div style="position:relative" (click)="itemClicked()" class="green" >
+        <ion-img  style="z-index: -1;" src="../../../../assets/images/tile.svg" ></ion-img>
+        <div style="position:absolute; top:0; left:0; ">
+        <!-- <p *ngIf="this.tileInput?.farmeable != null">{{this.tileInput?.create_date}}</p> -->
+        <ion-img style="z-index: 2;" src="{{this.tileInput?.image}}" *ngIf= "this.tileInput?.farmeable != null" ></ion-img>
+        <!-- <p *ngIf="this.tileInput?.canRecolect">Se puede recoger</p> -->
+        </div>
+        </div> 

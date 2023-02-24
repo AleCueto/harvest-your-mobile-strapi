@@ -1,0 +1,72 @@
+{
+
+    "farm":{
+        "welcome":"Welcome",
+        "start_your_adventure":"Start your adventure!",
+        "set_name":"Set a name to your farm",
+        "create_farm":"Create a new farm",
+        "theres_no_more":"Theres no more ",
+        "/s":"/s",
+        "deberias":"You should go to store and buy more"
+
+    },
+
+    "store":{
+        "select_your_farmeable":"Select your farmeable",
+        "amount":"amount",
+        "pay":"buy",
+        "buy_new_tile":"Buy a new tile",
+        "price":": ",
+        "coins":"coins",
+        "add_tile":"Add tile",
+        "buy_new_farm":"Buy a new farm: ",
+        "create_new_farm":"Create a new farm",
+        "choose_name":"Choose a name for your farm"
+    },
+    "farms":{
+        "farm_list":"Farm list",
+        "form_title":"Farms editting form"
+    },
+    "generic":{
+        "ok":"ok",
+        "money":"Money",
+        "farmeables":"Farmeables",
+        "tiles":"Tiles",
+        "farms":"Farms",
+        "name":"Name",
+        "edit":"Edit",
+        "delete":"Delete",
+        "error":"Error",
+        "cancel":"Cancel",
+        "warning":"Your cant!",
+        "modify":"Modify",
+        "add":"Add"
+    },
+    "creator":{
+        "not_posible":"Is not possible delete this farmeable because its used in some tile.",
+        "data_farmeable":"Farmeable data",
+        "image_beginning":"Image beginning",
+        "image_middle":"Image middle",
+        "image_end":"Image end",
+        "purchase_value":"Purchase value",
+        "sale_value":"Sale value",
+        "seconds_to_harvest":"Seconds to harvest"
+    },
+    "pages":{
+        "title":"Menu",
+        "farm":"Farm",
+        "store":"Store",
+        "farms":"Farms",
+        "creator":"Creator",
+        "about":"About me",
+        "farmlist":"Farms"
+    },
+    "about":{
+        "introduce":"My name is Alejandro Cueto Jiménez, im application and videogames developer",
+        "studies":"Estudio 2º DAM en el CPIFP (Málaga Tech Park)",
+        "module":"Y esta actividad es para el módulo de Acceso a Datos y Hora de Libre configuración",
+        "other_jobs":"Other jobs:"
+    }
+
+
+}

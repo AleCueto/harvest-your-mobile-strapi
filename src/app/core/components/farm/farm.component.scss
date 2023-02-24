@@ -1,0 +1,44 @@
+.ion-col{
+    background-color: black;
+}
+
+// .container{
+//     margin: 0%;
+//     border-radius: 20%;
+// }
+
+// ion-grid{
+//     width: 100%;
+//     border-radius: 20%;
+// }
+
+*{
+    font-family: Fredoka;
+}
+
+.square {
+    width: 70%;
+    margin: 1%;
+}
+
+.wrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    overflow-y: scroll;
+
+}
+
+
+// #global {
+// 	// height: 400px;
+// 	// width: 100px;
+// 	border: 1px solid #ddd;
+// 	background: #f1f1f1;
+// 	overflow-y: scroll;
+// }
+// #mensajes {
+// 	height: auto;
+// }

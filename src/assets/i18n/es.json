@@ -1,0 +1,76 @@
+{
+
+    "farm":{
+        "welcome":"Bienvenido",
+        "start_your_adventure":"¡Comienza tu aventura!",
+        "set_name":"Pon un nombre a tu granja",
+        "create_farm":"Crea una nueva granja",
+        "theres_no_more":"No hay más ",
+        "/s":"/s",
+        "deberias":"Deberías ir a la tienda y comprar más"
+
+    },
+
+    "store":{
+        "select_your_farmeable":"Elige tu farmeable",
+        "amount":"cantidad",
+        "pay":"comprar",
+        "buy_new_tile":"Compra una nueva casilla",
+        "price":"El precio de la casilla es: ",
+        "coins":" monedas",
+        "add_tile":"Añade casilla",
+        "buy_new_farm":"Compra una nueva granja",
+        "create_new_farm":"Crea una nueva granja",
+        "choose_name":"Elige un nombre para tu granja"
+    },
+    "farms":{
+        "farm_list":"Lista de granjas",
+        "form_title":"Formulario edición de granja"
+
+    },
+    "generic":{
+        "ok":"vale",
+        "money":"Dinero",
+        "farmeables":"Farmeables",
+        "tiles":"Casillas",
+        "farms":"Granjas",
+        "name":"Nombre",
+        "edit":"Editar",
+        "delete":"Borrar",
+        "error":"Error",
+        "cancel":"Cancelar",
+        "warning":"¡No puedes!",
+        "modify":"Modificar",
+        "add":"Añadir"
+    },
+    "creator":{
+        "not_posible":"No es posible borrar este farmeable porque se está usando en otra casilla.",
+        "data_farmeable":"Datos del farmeable",
+        "image_beginning":"Imagen del comienzo",
+        "image_middle":"Imagen intermedia",
+        "image_end":"Imagen del final",
+        "purchase_value":"Valor de compra",
+        "sale_value":"Valor de venta",
+        "seconds_to_harvest":"Segundos para recoger"
+    },
+    "pages":{
+        "title":"Menu",
+        "farm":"Granja",
+        "store":"Tienda",
+        "farms":"Granjas",
+        "creator":"Creador",
+        "about":"Sobre mi",
+        "farmlist":"Granjas"
+
+    },
+    "about":{
+        "introduce":"Mi nombre es Alejandro Cueto Jiménez, desarrollador de aplicaciones y videojuegos",
+        "studies":"I study 2º DAM at CPIFP (Málaga Tech Park)",
+        "module":"This is an activity for the module Data Access and free configuration hour",
+        "other_jobs":"Otros trabajos:"
+
+    }
+
+
+
+}
