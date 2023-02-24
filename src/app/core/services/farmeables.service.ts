@@ -34,7 +34,7 @@ export class FarmeablesService {
                     amount:farmeable.attributes.amount,
                     image_beggining:environment.api_url + farmeable.attributes.image_beggining.data?.attributes.formats.medium.url,
                     image_middle:environment.api_url + farmeable.attributes.image_middle.data?.attributes.formats.medium.url,
-                    image_end: environment.api_url + farmeable.attributes.image_middle.data?.attributes.formats.medium.url
+                    image_end: environment.api_url + farmeable.attributes.image_end.data?.attributes.formats.medium.url
                     // image_end:farmeable.attributes.image_end.data?+
                     // environment.api_url+farmeable.attributes.formats.medium.url:
                     // "" 

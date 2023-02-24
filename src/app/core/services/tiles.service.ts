@@ -140,7 +140,7 @@ export class TilesService {
       data:{
         id:tile.id,
         farmeable:tile.farmeable, 
-        // image: tile.image,
+        image: tile.image,
         // create_date: tile.create_date,
         canRecolect: tile.canRecolect,
         imageFarmeable: tile.canRecolect,
