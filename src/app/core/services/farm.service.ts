@@ -69,8 +69,10 @@ export class FarmService {
 
   public addTilesToFarm(farm:Farm){
 
+    let idFarm = farm.id
+
     for(let i = 0; i < farm.tileAmount; i++){
-      farm.tiles.push(this.tileSVC.createTile(farm))
+      farm.tiles.push(this.tileSVC.createTile(idFarm).id)
     }
 
   }
@@ -95,7 +97,7 @@ export class FarmService {
     });
 
     // JUAN 1
-    this.setSelectedFarm(this._farmSubject[this._farmSubject.value.length -1])
+    this.setSelectedFarm(this.getLasFarm())
     console.log("ew");
 
   }
@@ -116,8 +118,7 @@ export class FarmService {
 
 
   getLasFarm():Farm{
-    let farmArray = this._farmSubject.value
-    return this._farmSubject.value[farmArray.length]
+    return this._farmSubject.value[this._farmSubject.value.length-1]
   }
 
     //Farm List

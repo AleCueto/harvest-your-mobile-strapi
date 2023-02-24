@@ -7,6 +7,8 @@ export interface Tile{
     id:number;
     farmeable : Farmeable|null;
     image:string;
+    
+    // imageFarmeableId:number,
     imageFarmeable:string;
     //Tiempo plantado
     create_date:moment.Moment | null; //Esto va en el tile

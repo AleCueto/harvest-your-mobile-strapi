@@ -10,6 +10,6 @@ export interface Farm {
     //Número de tiles que vas a tener
     tileAmount:number;
     //Lista de tiles
-    tiles: Array<Tile>
+    tiles: Array<number>
     
 }

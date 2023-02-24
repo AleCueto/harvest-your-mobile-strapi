@@ -101,8 +101,8 @@ export class TilesService {
 
   }
 
-
-  public createTile(initialFarm:Farm):Tile{
+  //Devuelve un Tile nuevo asignado a una granja en concreto
+  public createTile(initialFarm:number):Tile{
 
     var index = this._tilesSubject.value.length
   
@@ -114,7 +114,7 @@ export class TilesService {
       create_date:null,
       canRecolect:false,
       imageFarmeable:"",
-      farms:[initialFarm.id]
+      farms:[initialFarm]
 
     }
 
@@ -140,8 +140,8 @@ export class TilesService {
       data:{
         id:tile.id,
         farmeable:tile.farmeable, 
-        image: tile.image,
-        create_date: tile.create_date,
+        // image: tile.image,
+        // create_date: tile.create_date,
         canRecolect: tile.canRecolect,
         imageFarmeable: tile.canRecolect,
       }

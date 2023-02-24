@@ -34,6 +34,7 @@ export class TileComponent implements OnInit {
   }
 
   itemClicked(){
+    console.log("werfwefwref")
     //ABRIR MODAL EN EL QUE ELEGIR EL FARMEABLE
     // console.log(this.tileSVC._tile.find(i=>i.id == this.tileInput?.id))
     if(this.tileInput!=undefined){
