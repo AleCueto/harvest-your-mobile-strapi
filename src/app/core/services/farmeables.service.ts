@@ -32,9 +32,18 @@ export class FarmeablesService {
                     purchase_value:farmeable.attributes.purchase_value,
                     sale_value:farmeable.attributes.sale_value,
                     amount:farmeable.attributes.amount,
-                    image_beggining:environment.api_url + farmeable.attributes.image_beggining.data?.attributes.formats.medium.url,
-                    image_middle:environment.api_url + farmeable.attributes.image_middle.data?.attributes.formats.medium.url,
-                    image_end: environment.api_url + farmeable.attributes.image_end.data?.attributes.formats.medium.url
+                    image_beggining:farmeable.attributes.image_beggining.data?
+                    environment.api_url+farmeable.attributes.image_beggining.data.attributes.url:
+                    "",
+                    image_middle:farmeable.attributes.image_middle.data?
+                    environment.api_url+farmeable.attributes.image_middle.data.attributes.url:
+                    "",
+                    image_end:farmeable.attributes.image_end.data?
+                    environment.api_url+farmeable.attributes.image_end.data.attributes.url:
+                    "",
+                    // image_beggining:environment.api_url + farmeable.attributes.image_beggining.data?.attributes.formats.medium.url,
+                    // image_middle:environment.api_url + farmeable.attributes.image_middle.data?.attributes.formats.medium.url,
+                    // image_end: environment.api_url + farmeable.attributes.image_end.data?.attributes.formats.medium.url
                     // image_end:farmeable.attributes.image_end.data?+
                     // environment.api_url+farmeable.attributes.formats.medium.url:
                     // "" 
@@ -71,9 +80,18 @@ export class FarmeablesService {
             purchase_value:response.data.attributes.purchase_value,
             sale_value:response.data.attributes.sale_value,
             amount:response.data.attributes.amount,
-            image_beggining:response.data.attributes.image_beggining.data.attributes.formats.medium.url,
-            image_middle:response.data.attributes.image_middle.data.attributes.formats.medium.url,
-            image_end:response.data.attributes.image_end.data.attributes.formats.medium.url
+            image_beggining:response.data.attributes.image_beggining.data?
+            environment.api_url+response.data.attributes.image_beggining.data.attributes.url:
+            "",
+            image_middle:response.data.attributes.image_middle.data?
+            environment.api_url+response.data.attributes.image_middle.data.attributes.url:
+            "",
+            image_end:response.data.attributes.image_end.data?
+            environment.api_url+response.data.attributes.image_end.data.attributes.url:
+            "",
+            // image_beggining:response.data.attributes.image_beggining.data.attributes.formats.medium.url,
+            // image_middle:response.data.attributes.image_middle.data.attributes.formats.medium.url,
+            // image_end:response.data.attributes.image_end.data.attributes.formats.medium.url
           });
           
         },
@@ -167,19 +185,53 @@ export class FarmeablesService {
   }
 
 
-  updateFarmeable(farmeable:Farmeable){
+  // async updateFarmeable(farmeable:Farmeable){
 
-    this.api.put(`/api/farmeable/${farmeable.id}`,{
-      data:{
-        name:farmeable.name,
-        seconds_to_harvest:farmeable.seconds_to_harvest,
-        purchase_value:farmeable.purchase_value,
-        sale_value:farmeable.sale_value,
-        amount:farmeable.amount,
-        image_beggining:farmeable.image_beggining,
-        image_middle:farmeable.image_middle,
-        image_end:farmeable.image_end
-      }
+  //   this.api.put(`/api/farmeable/${farmeable.id}`,{
+  //     data:{
+
+  //       // image_beggining:farmeable.image_beggining,
+  //       // image_middle:farmeable.image_middle,
+  //       // image_end:farmeable.image_end
+  //     }
+  //   }).subscribe({
+  //     next:data=>{
+  //       this.refresh(); 
+  //     },
+  //     error:err=>{
+  //       console.log(err);
+  //     }
+  //   });
+
+
+
+  //   // var _farmeable = this._farmeable.find(f => f.id == farmeable.id)
+
+  //   // if(_farmeable){
+  //   //   _farmeable.name = farmeable.name;
+  //   //   _farmeable.amount = farmeable.amount;
+  //   //   _farmeable.seconds_to_harvest = farmeable.seconds_to_harvest;
+  //   //   _farmeable.purchase_value = farmeable.purchase_value;
+  //   //   _farmeable.sale_value = farmeable.sale_value;
+  //   //   _farmeable.image_beggining = farmeable.image_beggining;
+  //   //   farmeable.image_middle = farmeable.image_middle;
+  //   //   farmeable.image_end = farmeable.image_end;
+
+  //   //   this.getFarmeables.next(this._farmeable);
+  //   // }
+
+  // }
+
+  async updateFarmeable(farmeable:Farmeable){
+    var _farmeable = {
+      name:farmeable.name,
+      seconds_to_harvest:farmeable.seconds_to_harvest,
+      purchase_value:farmeable.purchase_value,
+      sale_value:farmeable.sale_value,
+      amount:farmeable.amount,
+    };
+    this.api.put(`/api/farmeables/${farmeable.id}`,{
+      data:_farmeable
     }).subscribe({
       next:data=>{
         this.refresh(); 
@@ -188,24 +240,8 @@ export class FarmeablesService {
         console.log(err);
       }
     });
-
-    // var _farmeable = this._farmeable.find(f => f.id == farmeable.id)
-
-    // if(_farmeable){
-    //   _farmeable.name = farmeable.name;
-    //   _farmeable.amount = farmeable.amount;
-    //   _farmeable.seconds_to_harvest = farmeable.seconds_to_harvest;
-    //   _farmeable.purchase_value = farmeable.purchase_value;
-    //   _farmeable.sale_value = farmeable.sale_value;
-    //   _farmeable.image_beggining = farmeable.image_beggining;
-    //   farmeable.image_middle = farmeable.image_middle;
-    //   farmeable.image_end = farmeable.image_end;
-
-    //   this.getFarmeables.next(this._farmeable);
-    // }
-
+      
   }
-
 
 
   deleteFarmeableById(id:number){

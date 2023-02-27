@@ -10,8 +10,9 @@ import { TileDetailComponent } from '../tile-detail/tile-detail.component';
 import { TilesService } from '../../services/tiles.service';
 
 import * as moment from 'moment-timezone';
-import { ignoreElements, take, takeWhile } from 'rxjs';
+import { BehaviorSubject, ignoreElements, map, Observable, take, takeWhile } from 'rxjs';
 import { MoneyService } from '../../services/money.service';
+import { Farm } from '../../models/farm.model';
 
 @Component({
   selector: 'app-tile',
@@ -20,20 +21,52 @@ import { MoneyService } from '../../services/money.service';
 })
 export class TileComponent implements OnInit {
 
-  @Input() tileInput:Tile | undefined;
+  // @Input() tileInput:Tile | undefined;
+  @Input('tileInput') set tileInput(t:Tile){
+    this._tile = t;
+    this.loadFarmeable(t);
+
+    if(this.tileInput.idFarmeable != 6){
+    this.loadFarmeable(t);
+    }
+  }
+
+  private async loadFarmeable(t:Tile){
+    this._farmeable.next(await this.farmeableSVC.getFarmeableById(t.idFarmeable));
+  }  
+  get tileInput():Tile{
+    return this._tile;
+  }
 
 
+  private _tile:Tile;
+  public isPlanted:Boolean;
+  private _farmeable:BehaviorSubject<Farmeable> = new BehaviorSubject<Farmeable>(null);
+  farmeable$:Observable<Farmeable> = this._farmeable.asObservable();
   constructor(
     private farmeableSVC:FarmeablesService,
     private tileSVC:TilesService,
     private modal:ModalController,
-    private moneySVC:MoneyService
-    ) { }
+    private moneySVC:MoneyService,
+
+    ) { 
+
+      // this.loadFarmeable(this.tileInput)
+
+    }
 
   ngOnInit() {
+    if(this.tileInput.idFarmeable != 6){
+      this.loadFarmeable(this.tileInput)
+      console.log(this._farmeable.value)
+    }
   }
+  
 
-  itemClicked(){
+
+  // farmeableActual:Farmeable;
+
+  async itemClicked(){
     console.log("werfwefwref")
     //ABRIR MODAL EN EL QUE ELEGIR EL FARMEABLE
     // console.log(this.tileSVC._tile.find(i=>i.id == this.tileInput?.id))
@@ -41,16 +74,24 @@ export class TileComponent implements OnInit {
       
       var tile = this.tileSVC._tilesSubject.value.find(i=>i.id == this.tileInput?.id)
       
-      if(tile?.farmeable == null || tile?.farmeable == undefined){
+      // await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name == null || await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name == undefined
+
+      if(tile.idFarmeable == null || tile.idFarmeable == undefined || tile.idFarmeable == 6){
         this.presentForm()
       } else{
         if(tile?.canRecolect){
-          this.moneySVC.earnMoney(tile?.farmeable.sale_value)
+          this.moneySVC.earnMoney(await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value)
           this.cleanTile(tile)
         }else{
           console.log("Está lleno y no puedes recoger")
+
+          // HAY QUE QUITARLO
+          this.moneySVC.earnMoney(await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value)
+          this.cleanTile(tile)
         }
       }
+
+      this.loadFarmeable(this.tileInput)
 
     }
     // console.log("Has clicado la casilla número " + this.tileInput?.id)
@@ -61,10 +102,10 @@ export class TileComponent implements OnInit {
   }
 
   cleanTile(tile:Tile){
-    tile.farmeable = null;
+    tile.idFarmeable = 6;
     tile.canRecolect = false
 
-    this.tileSVC.updateTile(tile)
+    // this.tileSVC.updateTile(tile)
   }
 
   deleteTile(tile:Tile | undefined){
@@ -72,52 +113,88 @@ export class TileComponent implements OnInit {
     this.tileSVC.deleteTile(tile.id)
   }
 
-  setFarmeable(farmeable:Farmeable){
+  async setFarmeable(farmeable:Farmeable){
 
+    this.isPlanted = true
     // this.tileInput!.farmeable = this.farmeableSVC._farmeable.find(i => {return i.name == "puerro"})!;
     var tile = this.tileSVC._tilesSubject.value.find(i=>i.id == this.tileInput?.id)
-    if(this.tileInput != undefined){
-      tile!.farmeable = farmeable;
-      console.log(tile?.id + " |" + tile?.farmeable.name)
-      tile!.create_date = moment();
-      tile!.image = tile!.farmeable.image_beggining
-      // console.log(tile)
-      var moment_to_harvest = tile?.create_date?.add(tile?.farmeable?.seconds_to_harvest, "seconds")
+    
+    // var farmeableLocal;
 
-      this.tileSVC.updateTile(tile)
+    if(this.tileInput != undefined){
+
+      // farmeableLocal = {
+        
+        //   id:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).id,
+        //   name:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name,
+        //   seconds_to_harvest:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest,
+        //   purchase_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).purchase_value,
+        //   sale_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value,
+        //   amount:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).amount,
+        //   image_beggining:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_beggining,
+        //   image_middle:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_middle,
+        //   image_end:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_end,
+        
+        // }
+        
+        // this.farmeableActual = farmeableLocal
+        
+      tile!.idFarmeable = farmeable.id;
+      console.log(tile?.id + " |" + tile?.idFarmeable)
+      tile!.createAt = moment();
+      // this.tileSVC.updateTile(tile)
+      this.loadFarmeable(this.tileInput)
+      // tile!.image = tile!.farmeable.image_beggining
+      // console.log(tile)
+
+      //TIEMPO
+      // var moment_to_harvest = tile?.createAt?.add((await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest, "seconds")
+
+
+
+
     }
     // this.tileInput!.farmeable = farmeable;
 
 
-    var index = 1
 
-    //Creation observable to control time
-    var time_farming = this.tileSVC.actual_time
-    .pipe(take(tile?.farmeable?.seconds_to_harvest || 1));
+    //TIEMPO 
 
-    time_farming.subscribe(
-      {
-        next(_moment:moment.Moment){
+    // var index = 1
+
+    // console.log(farmeableLocal.name)
+
+    // //Creation observable to control time
+    // var time_farming = this.tileSVC.actual_time
+    // .pipe(take(farmeableLocal.seconds_to_harvest || 1));
+
+    // time_farming.subscribe(
+    //   {
+    //     next(_moment:moment.Moment){
           
-          if(tile!.farmeable){
+    //       if(tile!.idFarmeable){
 
-          if(_moment.isAfter(moment_to_harvest)){
-            console.log("Puedes recoger: " + tile?.farmeable?.name)
-            tile!.image = tile!.farmeable.image_end
-            tile!.canRecolect = true;
-          }else if(index > tile!.farmeable.seconds_to_harvest/2){
-          // console.log(_moment.toISOString(), moment_to_harvest?.toISOString());
-          // console.log("Estoy dentro");
-          tile!.image = tile!.farmeable.image_middle
-          }
+    //       if(_moment.isAfter(moment_to_harvest)){
+    //         console.log("Puedes recoger: " + farmeableLocal.name)
+    //         //IMAGEN 
+    //         // tile!.image = tile!.farmeable.image_end
+    //         tile!.canRecolect = true;
+    //       }
+    //       else if(index > farmeableLocal.seconds_to_harvest/2){
+    //       // console.log(_moment.toISOString(), moment_to_harvest?.toISOString());
+    //       // console.log("Estoy dentro");
+
+    //       // IMAGEN
+    //       // tile!.image = tile!.farmeable.image_middle
+    //       }
           
-        }
-            //console.log(tile?.create_date?.add(tile?.farmeable?.days_to_harvest, "seconds"))
-            console.log("contador para recoger " + tile?.farmeable?.name + ":" + index)
-            index++
-        }
-      }
-    )
+    //     }
+    //         //console.log(tile?.create_date?.add(tile?.farmeable?.days_to_harvest, "seconds"))
+    //         console.log("contador para recoger " + farmeableLocal.name + ":" + index)
+    //         index++
+    //     }
+    //   }
+    // )
   }
 
 
@@ -128,7 +205,7 @@ export class TileComponent implements OnInit {
     modal.present();
     modal.onDidDismiss().then(result=>{
       if(result){
-        // console.log(result.data)
+        console.log(result.data)
         this.setFarmeable(result.data)
       }
 

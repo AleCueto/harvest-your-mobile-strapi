@@ -4,20 +4,23 @@ import * as moment from 'moment';
 
 export interface Tile{
     
+    // farmeable : Farmeable|null;
+
     id:number;
-    farmeable : Farmeable|null;
-    image:string;
+    idFarmeable: number;
+    createAt:moment.Moment | null; //Esto va en el tile
+    canRecolect:boolean;
+    farms:Array<Number>;
+    
+    // image:string;
     
     // imageFarmeableId:number,
-    imageFarmeable:string;
     //Tiempo plantado
-    create_date:moment.Moment | null; //Esto va en el tile
+    // imageFarmeable:string;
 
     //Control recolección
-    canRecolect:boolean;
 
     //Granjas (modularidad)
-    farms:Array<Number>;
 
 
 }

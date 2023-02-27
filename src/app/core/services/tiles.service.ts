@@ -32,11 +32,14 @@ export class TilesService {
         var array:Tile[] = (response.data as any[]).map<Tile>(tile=>{
           return {
                   id:tile.id, 
-                  name:tile.attributes.name,
+                  // idFarmeable:tile.attributes.farmeable.data.id,
+                  idFarmeable:tile.attributes.farmeable.data.id,
+                  createAt:tile.attributes.create_date,
                   canRecolect:tile.attributes.canRecolect,
-                  image:null,
-                  farmeable:tile.attributes.farmeable.data,
-                  imageFarmeable:tile.attributes.farmeable.image_end,
+                  // name:tile.attributes.name,
+                  // image:null,
+                  // farmeable:tile.attributes.farmeable.data,
+                  // imageFarmeable:tile.attributes.farmeable.image_end,
                   farms:(tile.attributes.farms.data as any[]).map<number>(farm=>{
                     return farm.id
                   }),
@@ -74,11 +77,11 @@ export class TilesService {
     var newEmptyTile:Tile = {
 
       id:index,
-      farmeable:null, 
-      image: "",
-      create_date:null,
+      idFarmeable:null, 
+      // image: "",
+      createAt:null,
       canRecolect:false,
-      imageFarmeable:"",
+      // imageFarmeable:"",
       farms:[newId]
 
     }
@@ -109,11 +112,11 @@ export class TilesService {
     var newEmptyTile:Tile = {
 
       id:index,
-      farmeable:null, 
-      image: "",
-      create_date:null,
+      idFarmeable:null, 
+      // image: "",
+      createAt:null,
       canRecolect:false,
-      imageFarmeable:"",
+      // imageFarmeable:"",
       farms:[initialFarm]
 
     }
@@ -130,7 +133,7 @@ export class TilesService {
 
   getTileByFarmeable(farmeable:Farmeable):Tile[]{
     // JUAN 2
-    return this._tilesSubject.value.filter(a=>a.farmeable == farmeable);
+    return this._tilesSubject.value.filter(a=>a.idFarmeable == farmeable.id);
   }
 
 
@@ -139,8 +142,8 @@ export class TilesService {
     this.api.put(`/api/tiles/${tile.id}`,{
       data:{
         id:tile.id,
-        farmeable:tile.farmeable, 
-        image: tile.image,
+        farmeable:tile.idFarmeable, 
+        // image: tile.image,
         // create_date: tile.create_date,
         canRecolect: tile.canRecolect,
         imageFarmeable: tile.canRecolect,
@@ -162,11 +165,11 @@ export class TilesService {
     
     this.api.post(`/api/tiles`,{
       data:{
-        farmeable:tile.farmeable, 
-        image: tile.image,
-        create_date:tile.create_date,
+        farmeable:tile.idFarmeable, 
+        // image: tile.image,
+        create_date:tile.createAt,
         canRecolect:tile.canRecolect,
-        imageFarmeable:tile.imageFarmeable,
+        // imageFarmeable:tile.imageFarmeable,
         farms:tile.farms
         // image_beggining:farmeable.image_beggining,
         // image_middle:farmeable.image_middle,
