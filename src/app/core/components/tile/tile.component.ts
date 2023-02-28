@@ -63,11 +63,16 @@ export class TileComponent implements OnInit {
     if(this.tileInput.idFarmeable != 6){
       // this.loadFarmeable(this.tileInput)
       // console.log(this._farmeable.value)
-
       console.log("Empezar a contar")
-
       
+      // QUITAR ESTO CUANDO HAYA QUE ACTIVAR EL TIEMPO DE CULTIVO
+      this.tileInput.canRecolect = true;
+
+      // this.updateTile(this.tileInput)
+
     }
+
+
   }
   
 
@@ -146,6 +151,7 @@ export class TileComponent implements OnInit {
       tile!.idFarmeable = farmeable.id;
       console.log(tile?.id + " |" + tile?.idFarmeable)
       tile!.createAt = moment();
+      tile!.canRecolect = false
       this.tileSVC.updateTile(tile)
       this.loadFarmeable(this.tileInput)
       // tile!.image = tile!.farmeable.image_beggining
