@@ -109,7 +109,7 @@ export class TileComponent implements OnInit {
     tile.idFarmeable = 6;
     tile.canRecolect = false
 
-    // this.tileSVC.updateTile(tile)
+    this.tileSVC.updateTile(tile)
   }
 
   deleteTile(tile:Tile | undefined){
@@ -146,7 +146,7 @@ export class TileComponent implements OnInit {
       tile!.idFarmeable = farmeable.id;
       console.log(tile?.id + " |" + tile?.idFarmeable)
       tile!.createAt = moment();
-      // this.tileSVC.updateTile(tile)
+      this.tileSVC.updateTile(tile)
       this.loadFarmeable(this.tileInput)
       // tile!.image = tile!.farmeable.image_beggining
       // console.log(tile)
