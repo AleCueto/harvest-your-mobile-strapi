@@ -16,6 +16,8 @@ import { FarmDetailedComponent } from './components/farm-detailed/farm-detailed.
 import { FarmeableCreatorComponent } from './components/farmeable-creator/farmeable-creator.component';
 import { FarmeableEditableComponent } from './components/farmeable-editable/farmeable-editable.component';
 import { FarmeableDetailedComponent } from './components/farmeable-detailed/farmeable-detailed.component';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
 
 
 @NgModule({
@@ -32,6 +34,10 @@ import { FarmeableDetailedComponent } from './components/farmeable-detailed/farm
     useFactory: (createTranslateLoader),
     deps: [HttpClient]
     }
+    }),
+    IonicStorageModule.forRoot({
+      name: '__harvestdb',
+          driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
     }),
     ReactiveFormsModule,
     

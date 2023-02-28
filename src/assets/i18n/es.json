@@ -69,6 +69,27 @@
         "module":"This is an activity for the module Data Access and free configuration hour",
         "other_jobs":"Otros trabajos:"
 
+    },
+    "validators":{
+        "passwordMatch": "Las contraseñas no coinciden",
+        "passwordProto": "Al menos 8 caracteres, una letra mayúscula, una letra minúscula y un número",
+        "email": "Debe introducir un email válido"
+    },
+    "login":{
+        "title":"Iniciar sesión",
+        "email":"Email",
+        "password":"Contraseña",
+        "send":"Enviar"
+    },
+    "register":{
+        "title":"Registro",
+        "register":"quiero registrarme",
+        "first_name":"Nombre",
+        "last_name":"Apellidos",
+        "email":"Email",
+        "password":"Contraseña",
+        "confirm_password":"Repita contraseña",
+        "send":"Enviar"
     }
 
 
