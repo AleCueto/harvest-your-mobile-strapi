@@ -63,6 +63,10 @@ export class TileComponent implements OnInit {
     if(this.tileInput.idFarmeable != 6){
       // this.loadFarmeable(this.tileInput)
       // console.log(this._farmeable.value)
+
+      console.log("Empezar a contar")
+
+      
     }
   }
   
@@ -88,10 +92,9 @@ export class TileComponent implements OnInit {
           this.cleanTile(tile)
         }else{
           console.log("Está lleno y no puedes recoger")
-
           // HAY QUE QUITARLO
-          this.moneySVC.earnMoney(await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value)
-          this.cleanTile(tile)
+          // this.moneySVC.earnMoney(await (await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value)
+          // this.cleanTile(tile)
         }
       }
 
@@ -104,6 +107,8 @@ export class TileComponent implements OnInit {
     // }
 
   }
+  
+
 
   cleanTile(tile:Tile){
     tile.idFarmeable = 6;
@@ -112,9 +117,16 @@ export class TileComponent implements OnInit {
     this.tileSVC.updateTile(tile)
   }
 
+
+  updateTile(tile:Tile){
+    this.tileSVC.updateTile(tile);
+  }
+
   deleteTile(tile:Tile | undefined){
-    if(tile)
-    this.tileSVC.deleteTile(tile.id)
+    // if(tile)
+    // this.tileSVC.deleteTile(tile.id)
+
+    console.log("borrado")
   }
 
   async setFarmeable(farmeable:Farmeable){
@@ -123,23 +135,11 @@ export class TileComponent implements OnInit {
     // this.tileInput!.farmeable = this.farmeableSVC._farmeable.find(i => {return i.name == "puerro"})!;
     var tile = this.tileSVC._tilesSubject.value.find(i=>i.id == this.tileInput?.id)
     
-    // var farmeableLocal;
+    var farmeableLocal;
 
     if(this.tileInput != undefined){
 
-      // farmeableLocal = {
-        
-        //   id:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).id,
-        //   name:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name,
-        //   seconds_to_harvest:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest,
-        //   purchase_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).purchase_value,
-        //   sale_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value,
-        //   amount:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).amount,
-        //   image_beggining:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_beggining,
-        //   image_middle:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_middle,
-        //   image_end:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_end,
-        
-        // }
+
         
         // this.farmeableActual = farmeableLocal
         
@@ -151,8 +151,22 @@ export class TileComponent implements OnInit {
       // tile!.image = tile!.farmeable.image_beggining
       // console.log(tile)
 
+
+      farmeableLocal = {
+        
+        id:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).id,
+        name:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name,
+        seconds_to_harvest:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest,
+        purchase_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).purchase_value,
+        sale_value:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).sale_value,
+        amount:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).amount,
+        image_beggining:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_beggining,
+        image_middle:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_middle,
+        image_end:(await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).image_end,
+      
+      }
       //TIEMPO
-      // var moment_to_harvest = tile?.createAt?.add((await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest, "seconds")
+      var moment_to_harvest = tile?.createAt?.add((await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest, "seconds")
 
 
 
@@ -164,42 +178,57 @@ export class TileComponent implements OnInit {
 
     //TIEMPO 
 
-    // var index = 1
+    var that = this;
 
-    // console.log(farmeableLocal.name)
+    var index = 1
 
-    // //Creation observable to control time
-    // var time_farming = this.tileSVC.actual_time
-    // .pipe(take(farmeableLocal.seconds_to_harvest || 1));
+    console.log((await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).name)
 
-    // time_farming.subscribe(
-    //   {
-    //     next(_moment:moment.Moment){
+    //Creation observable to control time
+    var time_farming = this.tileSVC.actual_time
+    .pipe(take((await this.farmeableSVC.getFarmeableById(tile.idFarmeable)).seconds_to_harvest || 1));
+
+    time_farming.subscribe(
+      {
+
+        next(_moment:moment.Moment){
           
-    //       if(tile!.idFarmeable){
 
-    //       if(_moment.isAfter(moment_to_harvest)){
-    //         console.log("Puedes recoger: " + farmeableLocal.name)
-    //         //IMAGEN 
-    //         // tile!.image = tile!.farmeable.image_end
-    //         tile!.canRecolect = true;
-    //       }
-    //       else if(index > farmeableLocal.seconds_to_harvest/2){
-    //       // console.log(_moment.toISOString(), moment_to_harvest?.toISOString());
-    //       // console.log("Estoy dentro");
+          console.log(_moment  + " - " + moment_to_harvest)
 
-    //       // IMAGEN
-    //       // tile!.image = tile!.farmeable.image_middle
-    //       }
+          if(tile!.idFarmeable){
+
+          if(_moment.isAfter(moment_to_harvest)){
+            console.log("Puedes recoger: " + farmeableLocal.name)
+            //IMAGEN 
+            // tile!.image = tile!.farmeable.image_end
+            tile!.canRecolect = true;
+            that.updateTile(tile)
+
+
+
+            // this.tileSVC.updateTile(tile)
+            // this.updateTile(tile)
+
+          }
+          else if(index > farmeableLocal.seconds_to_harvest/2){
+          console.log(_moment.toISOString(), moment_to_harvest?.toISOString());
+          // console.log("Estoy dentro");
+
+          // IMAGEN
+          // tile!.image = tile!.farmeable.image_middle
+          }
           
-    //     }
-    //         //console.log(tile?.create_date?.add(tile?.farmeable?.days_to_harvest, "seconds"))
-    //         console.log("contador para recoger " + farmeableLocal.name + ":" + index)
-    //         index++
-    //     }
-    //   }
-    // )
+        }
+            //console.log(tile?.create_date?.add(tile?.farmeable?.days_to_harvest, "seconds"))
+            console.log("contador para recoger " + farmeableLocal.name + ":" + index)
+            index++
+        }
+      }
+    )
   }
+
+
 
 
   async presentForm(){
@@ -219,3 +248,5 @@ export class TileComponent implements OnInit {
   }
 
 }
+
+
