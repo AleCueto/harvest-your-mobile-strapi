@@ -19,8 +19,8 @@
     <ion-row>
     </ion-row>
     <ion-row>
-      <ion-col id="mensajes" style="background-color: #B6E7B4;" sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="4" *ngFor="let item of getTilesByFarm(farm.id)">
-        <app-tile [tileInput]="item"></app-tile>
+      <ion-col id="mensajes" style="background-color: #B6E7B4;" sizeLg="3" sizeMd="3" sizeSm="3" sizeXs="4" *ngFor="let tileInput of getTilesByFarm(farm.id)">
+        <app-tile [tileInput]="tileInput"></app-tile>
       </ion-col>
     </ion-row>
 

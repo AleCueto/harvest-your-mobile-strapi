@@ -26,12 +26,13 @@ export class TileComponent implements OnInit {
     this._tile = t;
     this.loadFarmeable(t);
 
-    if(this.tileInput.idFarmeable != 6){
-    this.loadFarmeable(t);
-    }
+    // if(this.tileInput.idFarmeable != 6){
+    // this.loadFarmeable(t);
+    // }
   }
 
   private async loadFarmeable(t:Tile){
+    console.log(await this.farmeableSVC.getFarmeableById(t.idFarmeable))
     this._farmeable.next(await this.farmeableSVC.getFarmeableById(t.idFarmeable));
   }  
   get tileInput():Tile{
@@ -56,9 +57,12 @@ export class TileComponent implements OnInit {
     }
 
   ngOnInit() {
+
+    //COMPROBAR QUE DATOS TENGO AQUI Y SI NO LOS TENGO INTENTAR ASIGNAR EL FARMEABLE$ AQUI
+
     if(this.tileInput.idFarmeable != 6){
-      this.loadFarmeable(this.tileInput)
-      console.log(this._farmeable.value)
+      // this.loadFarmeable(this.tileInput)
+      // console.log(this._farmeable.value)
     }
   }
   

@@ -3,7 +3,8 @@
         <ion-img  style="z-index: -1;" src="../../../../assets/images/tile.svg" ></ion-img>
         <div style="position:absolute; top:0; left:0; ">
         <!-- <p *ngIf="this.tileInput?.farmeable != null">{{this.tileInput?.create_date}}</p> -->
-        <ion-img style="z-index: 2;" [src]="(farmeable$ | async).image_end"  *ngIf= "this.isPlanted"></ion-img>
+        <ion-img style="z-index: 2;" *ngIf="(farmeable$ | async)?.image_end" [src]="(farmeable$ | async).image_end"  ></ion-img>
         <!-- <p *ngIf="this.tileInput?.canRecolect">Se puede recoger</p> -->
+        <!-- <p>{{(farmeable$ | async).name}}</p> -->
         </div>
         </div> 

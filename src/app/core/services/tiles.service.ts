@@ -136,6 +136,8 @@ export class TilesService {
     return this._tilesSubject.value.filter(a=>a.idFarmeable == farmeable.id);
   }
 
+  
+
 
   updateTile(tile:Tile){
 
