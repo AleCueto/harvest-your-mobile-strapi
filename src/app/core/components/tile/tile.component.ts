@@ -129,7 +129,7 @@ export class TileComponent implements OnInit {
 
   deleteTile(tile:Tile | undefined){
     // if(tile)
-    // this.tileSVC.deleteTile(tile.id)
+    this.tileSVC.deleteTile(tile.id)
 
     console.log("borrado")
   }

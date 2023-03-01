@@ -77,7 +77,7 @@ export class TilesService {
     var newEmptyTile:Tile = {
 
       id:index,
-      idFarmeable:null, 
+      idFarmeable:6, 
       // image: "",
       createAt:null,
       canRecolect:false,
