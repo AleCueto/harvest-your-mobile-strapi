@@ -26,6 +26,8 @@ export class TileDetailComponent implements OnInit {
 
     this.farmeables = this.farmeableSVC.getFarmeables()
 
+    this.farmeables = this.farmeables.filter((item) => item.id != 6)
+    
   }
 
   //Lanza el modal con todos los objetos disponibles (tile-detail.component)

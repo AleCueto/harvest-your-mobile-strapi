@@ -63,7 +63,11 @@ export class FarmeableSelectableComponent implements OnInit, ControlValueAccesso
 
 
   getFarmeables(){
-    return this.farmeableSVC.getFarmeables();
+    var farmeables =  this.farmeableSVC.getFarmeables();
+
+    farmeables = farmeables.filter((item) => item.id != 6)
+
+    return farmeables;
   }
 
   selectItem(farmSelected:Farmeable, accordion:IonAccordionGroup){
