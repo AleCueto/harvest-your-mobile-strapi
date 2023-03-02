@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
   }
   
   errorsToArray(errors){
-   
+  
     if(errors && !('required' in errors))
       return [Object.keys(errors)[0]];
     else

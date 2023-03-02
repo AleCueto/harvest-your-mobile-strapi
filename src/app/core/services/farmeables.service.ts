@@ -128,6 +128,23 @@ export class FarmeablesService {
 
 
   
+  uploadImage(file){  
+    return new Promise<number>((resolve, reject)=>{
+      var formData = new FormData();
+      formData.append('files', file);
+      this.api.post("/api/upload",formData).subscribe({
+        next: data=>{
+          resolve(data[0].id);
+        },
+        error: err=>{
+          reject(err);
+        }
+      });
+    });
+    
+  }
+  
+  
   async useFarmeable(id_farmeable:number, amountGetted:number){
 
     var farmeable = this.getFarmeableById(id_farmeable);
@@ -151,29 +168,51 @@ export class FarmeablesService {
 
   }
 
-  createFarmeable(farmeable:Farmeable){
-    //IMAGE WHILE WE DONT HAVE IMAGES
-    farmeable.image_beggining = "https://picsum.photos/200"
-    farmeable.image_middle = "https://picsum.photos/200"
-    farmeable.image_end = "https://picsum.photos/200"
 
-
-    // farmeable.id = this.id++;
-    // this._farmeable.push(farmeable);
-    // this.getFarmeables.next(this._farmeable);
-
-    
-    this.api.post(`/api/farmeables`,{
-      data:{
-        name:farmeable.name,
-        seconds_to_harvest:farmeable.seconds_to_harvest,
-        purchase_value:farmeable.purchase_value,
-        sale_value:farmeable.sale_value,
-        amount:farmeable.amount,
-        // image_beggining:farmeable.image_beggining,
-        // image_middle:farmeable.image_middle,
-        // image_end:farmeable.image_end
+  async updateFarmeable(farmeable:Farmeable){
+    var _farmeable = {
+      name:farmeable.name,
+      seconds_to_harvest:farmeable.seconds_to_harvest,
+      purchase_value:farmeable.purchase_value,
+      sale_value:farmeable.sale_value,
+      amount:farmeable.amount,
+    };
+    if(farmeable['image_end_file']){
+      var id = await this.uploadImage(farmeable['image_end_file']);
+      _farmeable['image_end'] = id;
+    }
+    this.api.put(`/api/farmeables/${farmeable.id}`,{
+      data:_farmeable
+    }).subscribe({
+      next:data=>{
+        this.refresh(); 
+      },
+      error:err=>{
+        console.log(err);
       }
+    });
+      
+  }
+
+  async createFarmeable(farmeable:Farmeable){
+
+    var _farmeable = {
+      name:farmeable.name,
+      seconds_to_harvest:farmeable.seconds_to_harvest,
+      purchase_value:farmeable.purchase_value,
+      sale_value:farmeable.sale_value,
+      amount:farmeable.amount,
+      image_beggining:null,
+      image_middle:null,
+      // image_end:""
+      // tiles:undefined,
+    }
+    if(farmeable['image_end_file']){
+      var id = await this.uploadImage(farmeable['image_end_file']);
+      _farmeable['image_end'] = id;
+    }
+    this.api.post(`/api/farmeables`,{
+      data:_farmeable
     }).subscribe({
       next:data=>{
         this.refresh();
@@ -222,26 +261,6 @@ export class FarmeablesService {
 
   // }
 
-  async updateFarmeable(farmeable:Farmeable){
-    var _farmeable = {
-      name:farmeable.name,
-      seconds_to_harvest:farmeable.seconds_to_harvest,
-      purchase_value:farmeable.purchase_value,
-      sale_value:farmeable.sale_value,
-      amount:farmeable.amount,
-    };
-    this.api.put(`/api/farmeables/${farmeable.id}`,{
-      data:_farmeable
-    }).subscribe({
-      next:data=>{
-        this.refresh(); 
-      },
-      error:err=>{
-        console.log(err);
-      }
-    });
-      
-  }
 
 
   deleteFarmeableById(id:number){

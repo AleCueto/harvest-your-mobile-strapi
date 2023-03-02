@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { BehaviorSubject } from 'rxjs';
 import { Farmeable } from '../../models/farmeable.model';
 
 @Component({
@@ -12,6 +13,8 @@ export class FarmeableDetailedComponent implements OnInit {
 
   form:FormGroup;
   mode:"New" | "Edit" = "New";
+  currentImage = new BehaviorSubject<string>("");
+  currentImage$ = this.currentImage.asObservable();
   @Input('farmeable') set farmeable(farmeable:Farmeable){
     if(farmeable){
       this.form.controls['id'].setValue(farmeable.id);
@@ -19,17 +22,21 @@ export class FarmeableDetailedComponent implements OnInit {
       this.form.controls['amount'].setValue(farmeable.amount);
       this.form.controls['image_beggining'].setValue(farmeable.image_beggining);
       this.form.controls['image_middle'].setValue(farmeable.image_middle);
-      this.form.controls['image_end'].setValue(farmeable.image_end);
       this.form.controls['purchase_value'].setValue(farmeable.purchase_value);
       this.form.controls['sale_value'].setValue(farmeable.sale_value);
       this.form.controls['seconds_to_harvest'].setValue(farmeable.seconds_to_harvest);
+      this.form.controls['image_end'].setValue(farmeable.image_end);
+      if(farmeable.image_end)
+        this.currentImage.next(farmeable.image_end);
+      this.form.controls.image_end_file.setValue(null);
       this.mode = "Edit";
-    }
+  }
   }
 
   constructor(
     private fb:FormBuilder,
-    private modal:ModalController
+    private modal:ModalController,
+    private cdr:ChangeDetectorRef
   ) {
 
     
@@ -43,6 +50,7 @@ export class FarmeableDetailedComponent implements OnInit {
       purchase_value:['', [Validators.required]],
       sale_value:['', [Validators.required]],
       seconds_to_harvest:['', [Validators.required]],
+      image_end_file:[null]
     });
 
   }
@@ -57,4 +65,24 @@ export class FarmeableDetailedComponent implements OnInit {
   onDismiss(result:any){
     this.modal.dismiss(null, 'cancel');
   }
+
+
+  changePic(fileLoader){
+    fileLoader.click();
+    var that = this;
+    fileLoader.onchange = function () {
+      var file = fileLoader.files[0];
+      var reader = new FileReader();
+      reader.onload = () => {   
+        that.currentImage.next(reader.result as string);
+        that.cdr.detectChanges();
+        that.form.controls.image_end_file.setValue(file);
+      };
+      reader.onerror = (error) =>{
+        console.log(error);
+      }
+      reader.readAsDataURL(file);
+    }
+  }
+
 }
