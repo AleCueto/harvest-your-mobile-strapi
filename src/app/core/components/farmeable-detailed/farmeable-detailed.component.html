@@ -6,11 +6,11 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+<ion-content class="ion-padding">
+  
   <input id="fileLoader" type="file" #fileLoader name="files" title="Load Files" hidden>
   <ion-img style="width: 50%; margin: auto; padding: 5%;" (click)="changePic(fileLoader)" *ngIf="currentImage.value" [src]="currentImage$ | async"></ion-img>
   <ion-img style="width: 50%; margin: auto; padding: 5%;" (click)="changePic(fileLoader)" *ngIf="!currentImage.value" src="https://ionicframework.com/docs/img/demos/thumbnail.svg"></ion-img>
-  <ion-content class="ion-padding">
-
     
   <form [formGroup]="form" (ngSubmit)="onSubmit()" (keyup.enter)="onSubmit()">
     <ion-item>
@@ -26,7 +26,7 @@
       </ion-label>
       <ion-input type="number" placeholder="Introduce el número de farmeables" formControlName="amount"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">
         {{"creator.image_beginning"| translate}}
       </ion-label>
@@ -43,7 +43,7 @@
         {{"creator.image_end"| translate}}
       </ion-label>
       <ion-input type="text" placeholder="Introduce la tercera imagen" formControlName="image_end"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
       <ion-label position="floating">
         {{"creator.purchase_value"| translate}}
@@ -56,12 +56,12 @@
       </ion-label>
       <ion-input type="number" placeholder="Introduce el valor de compra" formControlName="sale_value"></ion-input>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">
         {{"creator.seconds_to_harvest"| translate}}
       </ion-label>
       <ion-input type="number" placeholder="Introduce los segundos para recoger" formControlName="seconds_to_harvest"></ion-input>
-    </ion-item>
+    </ion-item> -->
   </form>
 </ion-content>
 <ion-footer>

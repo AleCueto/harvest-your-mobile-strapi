@@ -44,12 +44,12 @@ export class FarmeableDetailedComponent implements OnInit {
       id:[null],
       name:['', [Validators.required]],
       amount:['', [Validators.required]],
-      image_beggining:['', [Validators.required]],
-      image_middle:['', [Validators.required]],
-      image_end:['', [Validators.required]],
+      image_beggining:[''],
+      image_middle:[''],
+      image_end:[''],
       purchase_value:['', [Validators.required]],
       sale_value:['', [Validators.required]],
-      seconds_to_harvest:['', [Validators.required]],
+      seconds_to_harvest:[0],
       image_end_file:[null]
     });
 
