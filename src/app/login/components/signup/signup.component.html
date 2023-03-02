@@ -6,7 +6,7 @@
       <ion-label position="stacked">
         {{'register.first_name' | translate}}<span class="required" *ngIf="form.controls.first_name.errors">&nbsp;&#42;</span>
       </ion-label>
-      <ion-input autocomplete="" placeHolder="Juan" type="text" formControlName="first_name"></ion-input>
+      <ion-input autocomplete="" placeHolder="Alejandro" type="text" formControlName="first_name"></ion-input>
       <span
       class="validationError"
       *ngFor="let error of errorsToArray(form.controls.first_name.errors)"
@@ -16,7 +16,7 @@
       <ion-label position="stacked">
         {{'register.last_name' | translate}}<span class="required" *ngIf="form.controls.last_name.errors">>&nbsp;&#42;</span>
       </ion-label>
-      <ion-input autocomplete="" placeHolder="Robles García" type="text" formControlName="last_name"></ion-input>
+      <ion-input autocomplete="" placeHolder="Cueto Jiménez" type="text" formControlName="last_name"></ion-input>
       <span
       class="validationError"
       *ngFor="let error of errorsToArray(form.controls.last_name.errors)"
@@ -26,7 +26,7 @@
       <ion-label position="stacked">
         {{'register.email' | translate}}<span class="required" *ngIf="form.controls.email.errors">&nbsp;&#42;</span>
       </ion-label>
-      <ion-input autocomplete="email" placeHolder="usuario@dominio" type="text" formControlName="email"></ion-input>
+      <ion-input autocomplete="email" placeHolder="usuario@dominio.com" type="text" formControlName="email"></ion-input>
       <span
       class="validationError"
       *ngFor="let error of errorsToArray(form.controls.email.errors)"
