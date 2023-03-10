@@ -18,7 +18,8 @@
  
 
  ## Strapi
-Se ha implementado un backend en strapi tal y como se explica en el siguiente video
+Se ha implementado un backend en strapi tal y como se explica en el siguiente video:
+
 [![Alt text](https://img.youtube.com/vi/Bw1r_H7NCX0/0.jpg)](https://youtu.be/Bw1r_H7NCX0)
  
   ## Repaso por rúbrica:
