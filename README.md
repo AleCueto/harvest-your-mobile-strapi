@@ -60,4 +60,4 @@ Algunas imagenes sacadas de freepic: https://www.freepik.es/vector-gratis/conjun
 
 ##Strapi
 Se ha implementado un backend en strapi tal y como se explica en el siguiente video
-[![Alt text](https://img.youtube.com/vi/DSB2tnbzK5A/0.jpg)](https://youtu.be/Bw1r_H7NCX0)
+[![Alt text](https://i.ytimg.com/an_webp/Bw1r_H7NCX0/mqdefault_6s.webp?du=3000&sqp=CIW9q6AG&rs=AOn4CLBmxFSdNOaK-7RN3-bnO-ZiEzOgjQ)](https://youtu.be/Bw1r_H7NCX0)
