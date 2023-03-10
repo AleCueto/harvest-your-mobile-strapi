@@ -17,7 +17,9 @@
  Sobre mí: En dicha página hay información sobre el desarrollador de la aplicación.
  
 
- 
+ ## Strapi
+Se ha implementado un backend en strapi tal y como se explica en el siguiente video
+[![Alt text](https://img.youtube.com/vi/Bw1r_H7NCX0/0.jpg)](https://youtu.be/Bw1r_H7NCX0)
  
   ## Repaso por rúbrica:
  
@@ -58,6 +60,3 @@ Algunas imagenes sacadas de freepic: https://www.freepik.es/vector-gratis/conjun
 ## Video de presentación:
 [![Alt text](https://img.youtube.com/vi/DSB2tnbzK5A/0.jpg)](https://www.youtube.com/watch?v=DSB2tnbzK5A)
 
-## Strapi
-Se ha implementado un backend en strapi tal y como se explica en el siguiente video
-[![Alt text](https://img.youtube.com/vi/Bw1r_H7NCX0/0.jpg)](https://youtu.be/Bw1r_H7NCX0)
